@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/29 16:01:30 by hyu               #+#    #+#             */
-/*   Updated: 2019/10/29 16:32:19 by hyu              ###   ########.fr       */
+/*   Created: 2019/11/04 15:17:17 by hyu               #+#    #+#             */
+/*   Updated: 2019/11/04 15:40:41 by hyu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,61 +27,49 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_putnbr(int i)
+int		ft_r_isspace(char *str, int i)
 {
-	if (i >= 10)
-		ft_putnbr(i / 10);
-	ft_putchar((i % 10) + '0');
+	while (i >= 0 && (str[i] == ' ' || str[i] == '\0' || str[i] == '\t'))
+	{
+		i--;
+	}
+	return (i);
 }
 
-int		ft_wordend(char *str, int i)
+int		ft_r_isword(char *str, int i)
 {
-	while ((str[i] == ' ' || str[i] == '\t' || str[i] == '\0' ) && i >= 0)
+	while (i>= 0 && str[i] != ' ' && str[i] != '\t')
 		i--;
 	return (i);
 }
 
-int		ft_wordbeginning(char *str, int i)
-{
-	while (str[i] != ' ' && str[i] != '\t' && i >= 0)
-		i--;
-	return (i + 1);
-}
-
 void	ft_printword(char *str, int i)
 {
-	while (str[i] != ' ' && str[i] != '\t' && str[i] != '\0')
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
-}
+	int	j;
 
-void	ft_revwstr(char *str)
-{
-	int i;
-	
-	i = ft_strlen(str);
-
-	while (i > 0)
+	j = 0;
+	while (str[i + j] != '\0' && str[i + j] != ' ' && str[i + j] != '\t')
 	{
-		i = ft_wordend(str, i);
-		if (i >= 0)
-		{
-			i = ft_wordbeginning(str, i);
-			ft_printword(str, i);
-			i--;
-		}
-		i = ft_wordend(str, i);
-		if (i > 0)
-			ft_putchar(' ');
+		ft_putchar(str[i + j]);
+		j++;
 	}
+	if (i != 0)
+		ft_putchar(' ');
 }
 int		main(int argc, char **argv)
 {
+	int	i;
+
+	i = 0;
 	if (argc == 2)
 	{
-		ft_revwstr(argv[1]);
+		i = ft_strlen(argv[1]);
+		while (i >= 0)
+		{
+			i = ft_r_isspace(argv[1], i);
+			i = ft_r_isword(argv[1], i);
+			ft_printword(argv[1], i + 1);
+		}
 	}
 	ft_putchar('\n');
 	return (0);
