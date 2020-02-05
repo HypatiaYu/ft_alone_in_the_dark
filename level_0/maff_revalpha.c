@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 15:39:15 by hyu               #+#    #+#             */
-/*   Updated: 2019/10/28 15:52:16 by hyu              ###   ########.fr       */
+/*   Created: 2019/10/31 12:29:48 by hyu               #+#    #+#             */
+/*   Updated: 2019/10/31 12:35:35 by hyu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int		main(void)
 {
 	int i;
 
-	i = 0;
-	while (i < 26)
+	i = 'z';
+	while (i >= 'a')
 	{
-		if (i % 2 == 0)
-			ft_putchar('z' - i);
 		if (i % 2 == 1)
-			ft_putchar('Z' - i);
-		i++;
+			ft_putchar(i - 32);
+		else if (i % 2 == 0)
+			ft_putchar(i);
+		i--;
 	}
 	ft_putchar('\n');
 	return (0);
